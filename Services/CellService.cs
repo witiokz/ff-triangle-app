@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Services
 {
-    public class CellService: ICellService
+    public class CellService : ICellService
     {
         public IReadOnlyList<Cell> MapLinesToCells(IReadOnlyList<string> lines)
         {
@@ -26,8 +26,8 @@ namespace Services
 
         public Cell GetValidChild(Cell currentNode, Cell leftChild, Cell rightChild)
         {
-            var validLeftChild = ValidateChild(currentNode, leftChild);
-            var validRightChild = ValidateChild(currentNode, rightChild);
+            var validLeftChild = ValidateChildValue(currentNode, leftChild);
+            var validRightChild = ValidateChildValue(currentNode, rightChild);
 
             if (validLeftChild != null && validRightChild != null)
             {
@@ -37,9 +37,19 @@ namespace Services
             return validLeftChild ?? validRightChild;
         }
 
-        private static Cell ValidateChild(Cell currentNode, Cell child)
+        public Cell FillNodePathIFEmpty(Cell node)
         {
-            if(currentNode?.Value % 2 != child?.Value % 2)
+            if (node.Path == null)
+            {
+                node.Path = new List<int> { node.Value };
+            }
+
+            return node;
+        }
+
+        private static Cell ValidateChildValue(Cell currentNode, Cell child)
+        {
+            if (currentNode?.Value % 2 != child?.Value % 2)
             {
                 return child;
             }

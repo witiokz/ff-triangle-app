@@ -7,5 +7,7 @@ namespace Services
     {
         IReadOnlyList<Cell> MapLinesToCells(IReadOnlyList<string> lines);
         Cell GetValidChild(Cell currentNode, Cell leftChild, Cell rightChild);
+
+        Cell FillNodePathIFEmpty(Cell node);
     }
 }

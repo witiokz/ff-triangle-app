@@ -38,15 +38,8 @@ namespace Services
 
                     if (chosenPathNode != null)
                     {
-                        if (currentNode.Path == null)
-                        {
-                            currentNode.Path = new List<int> { currentNode.Value };
-                        }
-
-                        if (chosenPathNode.Path == null)
-                        {
-                            chosenPathNode.Path = new List<int> { chosenPathNode.Value };
-                        }
+                        _cellService.FillNodePathIFEmpty(currentNode);
+                        _cellService.FillNodePathIFEmpty(chosenPathNode);
 
                         currentNode.Path.AddRange(chosenPathNode.Path);
                     }
